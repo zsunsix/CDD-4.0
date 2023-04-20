@@ -1,4 +1,6 @@
-lista_compras = ['banana','laranja', 'maçã']
-for i in lista_compras:
-    print(i)
+
+numero = 100
+for x in range(10):
+    numero += 1
+    print(numero)
 
