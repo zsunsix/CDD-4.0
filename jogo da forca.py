@@ -1,65 +1,67 @@
-import random  #importa uma biblioteca que trás funções aleatorias
+import random #importa uma biblioteca que trás funções aleatorias
 
-palavras = ["harry potter", "herminone", "draco", "weasley", "snape"]
+palavras = ["Harry", "Hermione", "Voldemort", "Snape", "Coruja"]
 
 palavra = random.choice(palavras)
 tentativas = 0
-chances = 5
+cc = len(palavra)
+chance = 5
 
+letra_escolhida = []
 
-letra_escolhida = [] #uma lista criada para as letras que já foram escolhidas
-palavra_atual = ["_"]*len(palavra) #ficará no lugar das palavras que não foram escolhidas
-#len vai colocar "_" a quantia equivalente a palavra
+palavra_atual = ["_"] * len(palavra)
 
-print("Seja bem vindo ao leve jogo de Hogwarts")
-print("Você terá 5 chances")
-print("Boa sorte, caro bruxo")
+print("Bem vindo ao Torneio")
+print("Seu objetivo é acertar os personagem do maior filme de magia")
+print("Você tera apenas 5 chances para acertar, caso erre será enfeitiçado")
 
-while tentativas < chances and ' '.join(palavra_atual) != palavra:
+while tentativas < chance:
+    opcao = int(input("Escolha 1 para chutar e 2 para continuar "))
 
-    letra = input("\nQual letra você deseja tentar, bruxo?\n ")
+    if opcao == 1:
+        chute = input("Digite o nome que voce acha que é")
+        if chute == palavra:
+            print("Você acertou")
+            break
+        else:
+            print("Você errou")
+            break
+    else:
+        letra = input("\nEscolha uma letra ! ").lower()
 
-    #caso venha acontecer de escolher uma letra repetida
-
-    while letra in letra_escolhida:
-        print("Você já escolheu essa palavra, tente outra!")
-        letra = input("\nQual letra você deseja tentar, bruxo?\n")
-
+        while letra in letra_escolhida:
+            print("Letra ja escolhida, tente novamente !")
+            letra = input("\nEscolha uma letra !")
         letra_escolhida.append(letra)
 
-        if letra in palavra:
-            print("Você acertou a letra, ponto para griffinoria!\n")
+        if letra in palavra.lower():
+            print("A letra esta presente")
             for i in range(len(palavra)):
-                if letra == palavra[i]:
+                if letra == palavra[i].lower():
                     palavra_atual[i] = letra
+                    cc -= 1
         else:
-            print("Você errou bruxo, que lamentável")
+            print("Você perdeu 1 tentativa")
             tentativas = tentativas + 1
 
-        #quantas tentativas o bruxo vai ter
-
-        print(f'Você já fez {tentativas} tentativas erradas e você ainda tem {chances - tentativas} tentativas.')
-
-        #estado atual da palavra
-
-        print("Esse é o estado atual")
+        print("Restam ", chance - tentativas, "tentativas")
+        print("Estado atual do nome")
         print(palavra_atual)
 
-        #quais as letras que o bruxo já tentou
+        if cc == 0:
+            break
 
-        print("As letras que você já tentou bruxo, são: ")
-        for item in letra_escolhida:
-            print(item, end=" ")
+        print("\nAs letras que foram tentadas são:")
+        print(", ".join(letra_escolhida))
 
-    if tentativas == chances:
-        print("Você perdeu bruxo, merece o feitiço avada kedrava\n")
+if tentativas == chance:
+    print("Você foi enfeitiçado")
 
-    else:
-        print("Parabéns bruxo, você ganhou, merece um banquete\n")
-
-    print(f' A palavra era, {palavra}')
+else:
+    print("Parabens você se tornou um aluno de Hogwarts!")
 
 
+print("A palavra era", palavra)
 
 
 
